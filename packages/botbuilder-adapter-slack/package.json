@@ -1,20 +1,56 @@
 {
-  "name": "botbuilder-adapter-slack",
-  "version": "1.0.3",
+  "_from": "botbuilder-adapter-slack",
+  "_id": "botbuilder-adapter-slack@1.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-q3lKJL3XYIEPNX2NaCae1VhDzj2Ln6w6tVSwHt9IgjoN+5h9hzLqbXDNMsbO83Pu2/mg1PzpO+R71ME06TVefA==",
+  "_location": "/botbuilder-adapter-slack",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "botbuilder-adapter-slack",
+    "name": "botbuilder-adapter-slack",
+    "escapedName": "botbuilder-adapter-slack",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/botbuilder-adapter-slack/-/botbuilder-adapter-slack-1.0.3.tgz",
+  "_shasum": "83a36b7a8dbfda854ed0db170a4efa84a56ad31f",
+  "_spec": "botbuilder-adapter-slack",
+  "_where": "D:\\quickwork\\adapter\\slack_botkit",
+  "author": {
+    "name": "Microsoft Corp."
+  },
+  "bugs": {
+    "url": "https://github.com/howdyai/botkit/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@slack/client": "^4.7.0",
+    "botbuilder": "^4.4.0",
+    "botkit": "^4.0.2",
+    "debug": "^4.1.0"
+  },
+  "deprecated": false,
   "description": "Connect Botkit or BotBuilder to Slack",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  },
   "files": [
     "/lib",
     "/src"
   ],
-  "scripts": {
-    "build": "tsc",
-    "test": "tsc ; nyc mocha tests/*.tests.js",
-    "eslint": "./node_modules/.bin/eslint --fix src/*"
-  },
-  "author": "Microsoft Corp.",
-  "license": "MIT",
+  "homepage": "https://github.com/howdyai/botkit/blob/master/packages/botbuilder-adapter-slack#readme",
   "keywords": [
     "slack",
     "botkit",
@@ -24,26 +60,18 @@
     "chatbots",
     "azure"
   ],
-  "homepage": "https://github.com/howdyai/botkit/blob/master/packages/botbuilder-adapter-slack#readme",
-  "bugs": {
-    "url": "https://github.com/howdyai/botkit/issues"
-  },
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "botbuilder-adapter-slack",
   "repository": {
     "type": "git",
-    "url": "https://github.com/howdyai/botkit.git"
+    "url": "git+https://github.com/howdyai/botkit.git"
   },
-  "dependencies": {
-    "@slack/client": "^4.7.0",
-    "botbuilder": "^4.4.0",
-    "botkit": "^4.0.2",
-    "debug": "^4.1.0"
+  "scripts": {
+    "build": "tsc",
+    "eslint": "eslint --fix src/*",
+    "test": "tsc ; nyc mocha tests/*.tests.js"
   },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
-  }
+  "typings": "./lib/index.d.ts",
+  "version": "1.0.3"
 }

@@ -445,7 +445,7 @@ export class SlackAdapter extends BotAdapter {
      * @param res A response object from Restify or Express
      * @returns If signature is valid, returns true. Otherwise, sends a 401 error status via http response and then returns false.
      */
-    private async verifySignature(req, res): Promise<boolean> {
+    private async verifySignature(req): Promise<boolean> {
         // is this an verified request from slack?
         if (this.options.clientSigningSecret && req.rawBody) {
             let timestamp = req.header('X-Slack-Request-Timestamp');
@@ -474,7 +474,7 @@ export class SlackAdapter extends BotAdapter {
             // replace direct compare with the hmac result
             if (!validSignature()) {
                 debug('Signature verification failed, Ignoring message');
-                res.status(401);
+               // res.status(401);
                 return false;
             }
         }
@@ -488,18 +488,18 @@ export class SlackAdapter extends BotAdapter {
      * @param res A response object from Restify or Express
      * @param logic A bot logic function in the form `async(context) => { ... }`
      */
-    public async processActivity(req, res, logic: (context: TurnContext) => Promise<void>): Promise<void> {
+    public async processActivity(req, logic: (context: TurnContext) => Promise<void>): Promise<void> {
         // Create an Activity based on the incoming message from Slack.
         // There are a few different types of event that Slack might send.
         let event = req.body;
 
         if (event.type === 'url_verification') {
-            res.status(200);
-            res.send(event.challenge);
+           // res.status(200);
+           // res.send(event.challenge);
             return;
         }
 
-        if (!await this.verifySignature(req, res)) {
+        if (!await this.verifySignature(req)) {
 
         } else if (event.payload) {
             // handle interactive_message callbacks and block_actions
@@ -507,8 +507,8 @@ export class SlackAdapter extends BotAdapter {
             event = JSON.parse(event.payload);
             if (this.options.verificationToken && event.token !== this.options.verificationToken) {
                 console.error('Rejected due to mismatched verificationToken:', event);
-                res.status(403);
-                res.end();
+               // res.status(403);
+               // res.end();
             } else {
                 const activity = {
                     timestamp: new Date(),
@@ -536,19 +536,19 @@ export class SlackAdapter extends BotAdapter {
                 await this.runMiddleware(context, logic);
 
                 // send http response back
-                res.status(context.turnState.get('httpStatus'));
+               // res.status(context.turnState.get('httpStatus'));
                 if (context.turnState.get('httpBody')) {
-                    res.send(context.turnState.get('httpBody'));
+                   // res.send(context.turnState.get('httpBody'));
                 } else {
-                    res.end();
+                   // res.end();
                 }
             }
         } else if (event.type === 'event_callback') {
             // this is an event api post
             if (this.options.verificationToken && event.token !== this.options.verificationToken) {
                 console.error('Rejected due to mismatched verificationToken:', event);
-                res.status(403);
-                res.end();
+               // res.status(403);
+               // res.end();
             } else {
                 const activity = {
                     id: event.event.ts ? event.event.ts : event.event.event_ts,
@@ -605,18 +605,18 @@ export class SlackAdapter extends BotAdapter {
                 await this.runMiddleware(context, logic);
 
                 // send http response back
-                res.status(context.turnState.get('httpStatus'));
+               // res.status(context.turnState.get('httpStatus'));
                 if (context.turnState.get('httpBody')) {
-                    res.send(context.turnState.get('httpBody'));
+                   // res.send(context.turnState.get('httpBody'));
                 } else {
-                    res.end();
+                   // res.end();
                 }
             }
         } else if (event.command) {
             if (this.options.verificationToken && event.token !== this.options.verificationToken) {
                 console.error('Rejected due to mismatched verificationToken:', event);
-                res.status(403);
-                res.end();
+                //res.status(403);
+                //res.end();
             } else {
                 // this is a slash command
                 const activity = {
@@ -653,11 +653,11 @@ export class SlackAdapter extends BotAdapter {
                 await this.runMiddleware(context, logic);
 
                 // send http response back
-                res.status(context.turnState.get('httpStatus'));
+                //res.status(context.turnState.get('httpStatus'));
                 if (context.turnState.get('httpBody')) {
-                    res.send(context.turnState.get('httpBody'));
+                    //res.send(context.turnState.get('httpBody'));
                 } else {
-                    res.end();
+                    //res.end();
                 }
             }
         } else {
